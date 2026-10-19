@@ -18,7 +18,7 @@ namespace Exam.Net.OPP.C_
         {
             TimeExam = timeExam;
             NumberOfQuestions = questionList.Length;
-            QuestionList = questionList;
+            QuestionList = (Question[])questionList.Clone();
         }
 
         public virtual void ShowExam()
@@ -49,7 +49,7 @@ namespace Exam.Net.OPP.C_
                 {
                     Console.WriteLine($"{answer.AnswerId}- {answer.AnswerText}");
                 }
-                Console.WriteLine($"Enter your answer: ");
+                Console.Write($"Enter your answer Id: ");
                 YourAnswer = int.Parse(Console.ReadLine());
                 if (YourAnswer == question.CorrectAnswerId)
                 {
@@ -61,7 +61,16 @@ namespace Exam.Net.OPP.C_
                     break;
                 }
             }
+            Console.Clear();
             Console.WriteLine("======================");
+            for (int i = 0; i < QuestionList.Length; i++)
+            {
+                Console.WriteLine($"Question {i + 1}: {QuestionList[i].Header}");
+                Console.WriteLine($"Body: {QuestionList[i].Body}");
+                Console.WriteLine($"Correct Answer Id: {QuestionList[i].CorrectAnswerId}");
+                Console.WriteLine($"Your Answer Id: {YourAnswer}");
+                Console.WriteLine("----------------------");
+            }
             Console.WriteLine($"Total Marks: {totalMarks}");
             Console.WriteLine($"Time Taken: {stopwatch} seconds");
         }
@@ -89,7 +98,7 @@ namespace Exam.Net.OPP.C_
                 {
                     Console.WriteLine($"{answer.AnswerId}- {answer.AnswerText}");
                 }
-                    Console.WriteLine($"Enter your answer Id: ");
+                    Console.Write($"Enter your answer Id: ");
                     YourAnswer = int.Parse(Console.ReadLine());
                     if(YourAnswer == question.CorrectAnswerId)
                     {
@@ -101,8 +110,15 @@ namespace Exam.Net.OPP.C_
                     break;
                 }
             }
-            
-            Console.WriteLine("======================");
+            Console.Clear();
+            for(int i = 0; i < QuestionList.Length; i++)
+            {
+                Console.WriteLine($"Question {i + 1}: MCQ");
+                Console.WriteLine($"Body: {QuestionList[i].Body}");
+                Console.WriteLine($"Correct Answer Id: {QuestionList[i].CorrectAnswerId}");
+                Console.WriteLine($"Your Answer Id: {YourAnswer}");
+                Console.WriteLine("----------------------");
+            }
             Console.WriteLine($"Total Marks: {totalMarks}");
             Console.WriteLine($"Time Taken: {stopwatch} seconds");
 
